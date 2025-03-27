@@ -2,9 +2,9 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
-from scraper import scrape_tweets
-from text_processing import process_tweets
-from wordcloud_generator import generate_wordcloud
+from backend.scraper import scrape_tweets
+from backend.text_processing import process_tweets
+from backend.wordcloud_generator import generate_wordcloud
 from mangum import Mangum
 import logging
 import asyncio
@@ -17,27 +17,27 @@ import sys
 app = FastAPI()
 
 
-def install_packages():
-    """런타임에 추가 패키지를 설치하는 함수"""
-    packages = [
-        "selenium",
-        "spacy",
-        "matplotlib",
-        "nltk",
-        "pandas",
-        "wordcloud",
-        "webdriver-manager"
-    ]
-    for package in packages:
-        try:
-            subprocess.run([sys.executable, "-m", "pip", "install", package], check=True)
-            print(f"✅ {package} 설치 완료")
-        except subprocess.CalledProcessError:
-            print(f"⚠ {package} 설치 실패")
+# def install_packages():
+#     """런타임에 추가 패키지를 설치하는 함수"""
+#     packages = [
+#         "selenium",
+#         "spacy",
+#         "matplotlib",
+#         "nltk",
+#         "pandas",
+#         "wordcloud",
+#         "webdriver-manager"
+#     ]
+#     for package in packages:
+#         try:
+#             subprocess.run([sys.executable, "-m", "pip", "install", package], check=True)
+#             print(f"✅ {package} 설치 완료")
+#         except subprocess.CalledProcessError:
+#             print(f"⚠ {package} 설치 실패")
 
-@app.on_event("startup")
-async def startup_event():
-    install_packages()
+# @app.on_event("startup")
+# async def startup_event():
+#     install_packages()
 
 
 # CORS 설정
@@ -53,7 +53,7 @@ app.add_middleware(
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-app.mount("/static", StaticFiles(directory=os.path.join(os.getcwd(), "static")), name="static")
+app.mount("/static", StaticFiles(directory=os.path.join(os.getcwd(), "backend/static")), name="static")
 
 
 # 프로젝트 경로 설정
