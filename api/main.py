@@ -10,9 +10,35 @@ import logging
 import asyncio
 import os
 from fastapi.staticfiles import StaticFiles
+import subprocess
+import sys
 
 # FastAPI 앱 초기화
 app = FastAPI()
+
+
+def install_packages():
+    """런타임에 추가 패키지를 설치하는 함수"""
+    packages = [
+        "selenium",
+        "spacy",
+        "matplotlib",
+        "nltk",
+        "pandas",
+        "wordcloud",
+        "webdriver-manager"
+    ]
+    for package in packages:
+        try:
+            subprocess.run([sys.executable, "-m", "pip", "install", package], check=True)
+            print(f"✅ {package} 설치 완료")
+        except subprocess.CalledProcessError:
+            print(f"⚠ {package} 설치 실패")
+
+@app.on_event("startup")
+async def startup_event():
+    install_packages()
+
 
 # CORS 설정
 app.add_middleware(
