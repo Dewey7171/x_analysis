@@ -5,6 +5,7 @@ from pathlib import Path
 from scraper import scrape_tweets
 from text_processing import process_tweets
 from wordcloud_generator import generate_wordcloud
+from mangum import Mangum
 import logging
 import asyncio
 import os
@@ -80,3 +81,7 @@ async def get_wordcloud(filename: str):
         raise HTTPException(status_code=404, detail="워드클라우드 이미지를 찾을 수 없습니다.")
     
     return {"message": "이미지가 존재합니다.", "image_path": f"static/{filename}"}
+
+
+# Vercel용 Mangum 핸들러 추가
+handler = Mangum(app)
