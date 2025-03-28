@@ -9,7 +9,7 @@ import time  # time 모듈 추가
 # SERVER_URL = os.getenv("SERVER_URL", "http://localhost:8000")
 SERVER_URL = st.secrets["SERVER_URL"]
 
-st.title(SERVER_URL)
+st.title("The keywords that built your Web3 identity")
 
 username = st.text_input("X Account")
 
@@ -51,7 +51,7 @@ if st.button("Start"):
                     if image_response.status_code == 200:
                         # 이미지 다운로드 및 표시
                         image = Image.open(BytesIO(image_response.content))
-                        st.image(image, caption="Hi X", use_container_width=True)
+                        st.image(image, caption="Your voice, visualized", use_container_width=True)
                     else:
                         st.error("Image download failed! Status code: {}".format(image_response.status_code))
                 else:
