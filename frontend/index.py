@@ -7,7 +7,7 @@ import time  # time 모듈 추가
 
 # 서버 URL을 환경 변수에서 가져오기
 # SERVER_URL = os.getenv("SERVER_URL", "http://localhost:8000")
-SERVER_URL = st.secrets["server"]["SERVER_URL"]
+SERVER_URL = st.secrets["SERVER_URL"]
 
 st.title("What do you Keyword a lot?")
 
