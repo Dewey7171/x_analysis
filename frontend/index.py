@@ -9,7 +9,7 @@ import time  # time 모듈 추가
 # SERVER_URL = os.getenv("SERVER_URL", "http://localhost:8000")
 SERVER_URL = st.secrets["SERVER_URL"]
 
-st.title("What do you Keyword a lot?")
+st.title(SERVER_URL)
 
 username = st.text_input("X Account")
 
