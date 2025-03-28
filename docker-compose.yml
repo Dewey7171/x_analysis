@@ -1,0 +1,10 @@
+services:
+  fastapi_app:
+    build: ./backend
+    container_name: dban7171/xanlytics
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+    restart: always

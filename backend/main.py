@@ -2,9 +2,9 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
-from backend.scraper import scrape_tweets
-from backend.text_processing import process_tweets
-from backend.wordcloud_generator import generate_wordcloud
+from scraper import scrape_tweets
+from text_processing import process_tweets
+from wordcloud_generator import generate_wordcloud
 from mangum import Mangum
 import logging
 import asyncio
@@ -53,7 +53,7 @@ app.add_middleware(
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-app.mount("/static", StaticFiles(directory=os.path.join(os.getcwd(), "backend/static")), name="static")
+app.mount("/static", StaticFiles(directory=os.path.join(os.getcwd(), "static")), name="static")
 
 
 # 프로젝트 경로 설정
